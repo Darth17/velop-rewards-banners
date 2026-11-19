@@ -1,0 +1,138 @@
+.banner {
+  --hotspot: #f4d18c;
+  --float-duration: 7.8s;
+  --float-delay: 0s;
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #161827;
+  mix-blend-mode: lighten;
+}
+
+.banner::before {
+  position: absolute;
+  z-index: 0;
+  inset: 7% 8%;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 36% 46%, rgba(74, 151, 255, .2), transparent 53%),
+    radial-gradient(ellipse at 68% 54%, rgba(180, 103, 255, .15), transparent 58%);
+  filter: blur(38px);
+  opacity: .25;
+  transform: scale(.94);
+  transition: opacity .48s ease, transform .6s cubic-bezier(.2, .75, .2, 1);
+  content: "";
+  pointer-events: none;
+}
+
+.banner::after {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background: radial-gradient(circle at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(255, 255, 255, .1), transparent 34%);
+  opacity: 0;
+  mix-blend-mode: screen;
+  transition: opacity .35s ease;
+  content: "";
+  pointer-events: none;
+}
+
+.image {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  filter: contrast(1.055) saturate(1.14) brightness(1.035);
+  transform: perspective(1400px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(0) scale(1);
+  translate: 0 0;
+  transform-origin: center;
+  transform-style: preserve-3d;
+  transition: transform .42s cubic-bezier(.2, .75, .2, 1), filter .42s ease;
+  animation: bannerDrift var(--float-duration) ease-in-out var(--float-delay) infinite;
+  will-change: transform, translate, filter;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.banner:hover::before,
+.banner:focus-within::before {
+  opacity: .85;
+  transform: scale(1.04);
+}
+
+.banner:hover::after,
+.banner:focus-within::after {
+  opacity: 1;
+}
+
+.banner:hover .image,
+.banner:focus-within .image {
+  filter: contrast(1.08) saturate(1.2) brightness(1.06);
+  transform: perspective(1400px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-2px) scale(1.004);
+}
+
+.ctaHotspot {
+  position: absolute;
+  z-index: 3;
+  display: block;
+  min-width: 24px;
+  min-height: 24px;
+  padding: 0;
+  appearance: none;
+  border: 0;
+  border-radius: 14px;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+  translate: 0 0;
+  animation: bannerDrift var(--float-duration) ease-in-out var(--float-delay) infinite;
+  transition: background-color .2s ease, box-shadow .2s ease, transform .2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ctaHotspot:hover {
+  border: 0;
+  outline: none;
+  background: rgba(255, 255, 255, .065);
+  box-shadow: none;
+}
+
+.ctaHotspot:active {
+  transform: scale(.985);
+  background: rgba(255, 255, 255, .12);
+}
+
+.ctaHotspot:focus-visible {
+  border: 0;
+  outline: none;
+  background: rgba(255, 255, 255, .08);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--hotspot) 78%, transparent);
+}
+
+@keyframes bannerDrift {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner::before,
+  .banner::after,
+  .image,
+  .ctaHotspot {
+    animation: none;
+    transition: none;
+  }
+
+  .image,
+  .banner:hover .image,
+  .banner:focus-within .image {
+    translate: 0 0;
+    transform: none;
+    filter: contrast(1.055) saturate(1.14) brightness(1.035);
+  }
+}
