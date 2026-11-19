@@ -1,3 +1,7 @@
+## Live site
+
+[Open the VELOOP Rewards site](https://veloop-rewards-bannersss.netlify.app/ )
+
 # VELOOP Rewards — polished single-page banner collection
 
 This is one static, scrollable page containing all five VELOOP Rewards banners from the supplied PDF. A quiet brand masthead, editorial introduction, numbered section labels, and restrained footer complete the landing-page presentation. There is no feature selector, route switching, or functional product navigation.
