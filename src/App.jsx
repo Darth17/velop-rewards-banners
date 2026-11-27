@@ -6,12 +6,43 @@ import ExchangeCenterBanner from './components/ExchangeCenterBanner/ExchangeCent
 import styles from './styles/App.module.css';
 
 const COLLECTION = [
-  { number: '01', eyebrow: 'SHARE THE GOOD', title: 'Refer & Earn', Component: ReferEarnBanner },
-  { number: '02', eyebrow: 'MOVE YOUR BALANCE', title: 'Swap Center', Component: SwapCenterBanner },
-  { number: '03', eyebrow: 'MORE TO DISCOVER', title: 'Bonus VEs', Component: BonusVEsBanner },
-  { number: '04', eyebrow: 'TASKS THAT COUNT', title: 'Captcha Tasks', Component: CaptchaTasksBanner },
-  { number: '05', eyebrow: 'MAKE IT YOURS', title: 'Exchange Center', Component: ExchangeCenterBanner },
+  {
+    number: '01',
+    eyebrow: 'SHARE THE GOOD',
+    title: 'Refer & Earn',
+    description: 'Share an invite code and earn together with friends.',
+    Component: ReferEarnBanner,
+  },
+  {
+    number: '02',
+    eyebrow: 'MOVE YOUR BALANCE',
+    title: 'Swap Center',
+    description: 'Move eligible reward balances between supported currencies.',
+    Component: SwapCenterBanner,
+  },
+  {
+    number: '03',
+    eyebrow: 'MORE TO DISCOVER',
+    title: 'Bonus VEs',
+    description: 'Explore eligible activities that can add extra VEs to your balance.',
+    Component: BonusVEsBanner,
+  },
+  {
+    number: '04',
+    eyebrow: 'TASKS THAT COUNT',
+    title: 'Captcha Tasks',
+    description: 'Complete simple captcha tasks and earn eligible Gem rewards.',
+    Component: CaptchaTasksBanner,
+  },
+  {
+    number: '05',
+    eyebrow: 'MAKE IT YOURS',
+    title: 'Exchange Center',
+    description: 'Convert eligible Gems into VEs and grow your reward balance.',
+    Component: ExchangeCenterBanner,
+  },
 ];
+
 
 export default function App() {
   return (
@@ -38,7 +69,7 @@ export default function App() {
       </section>
 
       <section className={styles.collection} aria-label="Five VELOOP Rewards banners">
-        {COLLECTION.map(({ number, eyebrow, title, Component }) => (
+        {COLLECTION.map(({ number, eyebrow, title, description, Component }) => (
           <article className={styles.bannerSection} key={number} aria-labelledby={`banner-title-${number}`}>
             <header className={styles.sectionHeader}>
               <span className={styles.sectionNumber}>{number}</span>
@@ -49,7 +80,8 @@ export default function App() {
               </div>
               <span className={styles.sectionIndex}>{number} <i /> 05</span>
             </header>
-            <Component />
+            <Component description={description} />
+
           </article>
         ))}
       </section>
